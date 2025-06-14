@@ -1,0 +1,139 @@
+* {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+#ui-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height: 100vh;
+    width: 100vw;
+}
+
+#win10-desktop {
+    flex: 1 0 0%;
+    background-image: url("assets/win10/desktop-backgrounds/default.png");
+    background-size: cover;
+}
+
+#win10-taskbar {
+    height: 40px;
+    background: linear-gradient(90deg, #133c41, #1a3745, #1f243f);
+    display: flex;
+    flex-direction: row;
+
+    & * {
+        color: white;
+    }
+}
+
+#taskbar-left-side {
+    height: 100%;
+}
+#taskbar-right-side {
+    height: 100%;
+    margin-left: auto;
+}
+
+#win10-taskbar button {
+    border: none;
+    padding: 0;
+    outline: none;
+    height: 100%;
+    width: 48px;
+    background-color: transparent;
+    vertical-align: top;
+    transition: background-color 150ms;
+}
+#win10-taskbar button:hover {
+    transition: background-color 0s;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#tbar-search {
+    position: relative;
+    display: inline-flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    height: 100%;
+    width: 288px;
+    background-color: #f4f4f4;
+    outline: 1px solid #cccccc;
+    outline-offset: -1px;
+
+    & > div {
+        display: flex;
+        flex: 1 1 0%;
+        min-width: 0;
+        background-color: transparent;
+        
+        & img {
+            margin: 0 12px;
+            align-self: center;
+        }
+
+        & input {
+            border: 0;
+            padding: 0;
+            min-width: 0;
+            outline: 0;
+            flex: 1 1 0%;
+            background-color: transparent;
+            font-size: 15px;
+            color: black;
+        }
+        & input::placeholder {
+            font-size: 15px;
+            color: black;
+        }
+    }
+
+    & > img {
+        width: 80px;
+        height: 40px;
+        background-color: transparent;
+    }
+
+    & > *:hover {
+        background-color: white;
+    }
+}
+#tbar-search:hover {
+    outline: 2px solid #aaaaaa;
+    outline-offset: -2px;
+}
+
+#win10-taskbar #tbar-weather {
+    width: 150px;
+}
+#win10-taskbar .tbar-button-small {
+    width: 22px;
+    height: calc(100% - 2px);
+    margin: 1px;
+}
+#win10-taskbar #tbar-expand-systray {
+    width: 24px;
+    margin-left: 8px;
+}
+#win10-taskbar .tbar-button-32px {
+    width: 32px;
+}
+#win10-taskbar .tbar-button-36px {
+    width: 36px;
+}
+#win10-taskbar #tbar-clock {
+    width: 64px;
+}
+#win10-taskbar #tbar-action-center {
+    width: 40px;
+}
+#win10-taskbar #tbar-show-desktop {
+    width: 5px;
+    border-left: 1px solid gray;
+    margin-left: 8px;
+}
