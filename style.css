@@ -137,3 +137,38 @@ body {
     border-left: 1px solid gray;
     margin-left: 8px;
 }
+
+
+
+.win10-app-window {
+    position: absolute;
+    background-color: blue;
+
+    & > div {
+        height: 29px;
+        width: 100%;
+        background-color: lightgray;
+
+        & button {
+            height: 100%;
+            width: 45px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            float: right;
+            transition: background-color 100ms;
+        }
+        & button:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        & button.win10-app-window-closebtn:hover {
+            background-color: red;
+        }
+    }
+
+    & > object {
+        width: 100%;
+        height: calc(100% - 29px);
+        background-color: white;
+    }
+}
