@@ -91,7 +91,12 @@ class ApplicationWindow {
         let closeBtn = document.createElement('button');
         closeBtn.innerHTML = 'X'
         closeBtn.className = "win10-app-window-closebtn"
-        closeBtn.onclick = () => desktop.removeChild(this._appContainer);
+        closeBtn.addEventListener(
+            'click',
+            (function (e) {
+                this.close();
+            }).bind(this)
+        );
         
         titleBar.appendChild(closeBtn);
         titleBar.appendChild(maximizeBtn);
