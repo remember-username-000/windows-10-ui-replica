@@ -7,6 +7,9 @@ class ApplicationWindow {
     _width;
     _height;
 
+    maximizeBtnState;
+    prevWindowSize;
+
     constructor () {
         const desktop = document.getElementById('win10-desktop');
 
@@ -20,6 +23,14 @@ class ApplicationWindow {
         this.left = 100;
         this.width = 600;
         this.height = 400;
+
+        this.maximizeBtnState = 'maximize';
+        this.prevWindowSize = {
+            t: this.top,
+            l: this.left,
+            w: this.width,
+            h: this.height,
+        };
 
         let titleBar = document.createElement('div');
 
@@ -55,9 +66,27 @@ class ApplicationWindow {
 
         let minimizeBtn = document.createElement('button');
         minimizeBtn.innerHTML = '--'
+        minimizeBtn.addEventListener(
+            'click',
+            (function (e) {
+                this.minimize();
+            }).bind(this)
+        );
 
         let maximizeBtn = document.createElement('button');
         maximizeBtn.innerHTML = '[ ]'
+        maximizeBtn.addEventListener(
+            'click',
+            (function (e) {
+                if (this.maximizeBtnState === 'maximize') {
+                    this.maximize();
+                } else if (this.maximizeBtnState === 'restore') {
+                    this.restore();
+                } else {
+                    console.log('invalid maximizeButton state');
+                }
+            }).bind(this)
+        );
 
         let closeBtn = document.createElement('button');
         closeBtn.innerHTML = 'X'
@@ -80,6 +109,33 @@ class ApplicationWindow {
     close () {
         //document.getElementById('win10-desktop').removeChild(this._appContainer);
         this._appContainer.remove();
+    }
+    maximize () {
+        this.prevWindowSize.t = this._top,
+        this.prevWindowSize.l = this._left,
+        this.prevWindowSize.w = this._width,
+        this.prevWindowSize.h = this._height,
+
+        this.top = 0;
+        this.left = 0;
+        //full width and height
+        this.width = getComputedStyle(this._appContainer.parentElement).width.slice(0, -2);
+        this.height = getComputedStyle(this._appContainer.parentElement).height.slice(0, -2);
+
+        this.maximizeBtnState = 'restore';
+        maximizeBtn.innerHTML = '[]-';
+    }
+    restore () {
+        this.top = this.prevWindowSize.t;
+        this.left = this.prevWindowSize.l;
+        this.width = this.prevWindowSize.w;
+        this.height = this.prevWindowSize.h;
+
+        this.maximizeBtnState = 'maximize';
+        maximizeBtn.innerHTML = '[ ]';
+    }
+    minimize () {
+        this._appContainer.style.display = 'none';
     }
 
     set top(val) {
