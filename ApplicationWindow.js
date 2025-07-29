@@ -63,6 +63,15 @@ class ApplicationWindow {
             })
             .bind(this)
         );
+        titleBar.addEventListener(
+            'click',
+            (function (e) {
+                if (this.maximizeBtnState === 'restore') {
+                    this.maximizeBtnState = 'maximize';
+                    maximizeBtn.innerHTML = '[ ]';
+                }
+            }).bind(this)
+        );
 
         let minimizeBtn = document.createElement('button');
         minimizeBtn.innerHTML = '--'
@@ -79,9 +88,14 @@ class ApplicationWindow {
             'click',
             (function (e) {
                 if (this.maximizeBtnState === 'maximize') {
+                    e.stopPropagation();
                     this.maximize();
+                    maximizeBtn.innerHTML = '[]-';
+                    this.maximizeBtnState = 'restore';
                 } else if (this.maximizeBtnState === 'restore') {
                     this.restore();
+                    maximizeBtn.innerHTML = '[ ]';
+                    this.maximizeBtnState = 'maximize';
                 } else {
                     console.log('invalid maximizeButton state');
                 }
@@ -126,18 +140,12 @@ class ApplicationWindow {
         //full width and height
         this.width = getComputedStyle(this._appContainer.parentElement).width.slice(0, -2);
         this.height = getComputedStyle(this._appContainer.parentElement).height.slice(0, -2);
-
-        this.maximizeBtnState = 'restore';
-        maximizeBtn.innerHTML = '[]-';
     }
     restore () {
         this.top = this.prevWindowSize.t;
         this.left = this.prevWindowSize.l;
         this.width = this.prevWindowSize.w;
         this.height = this.prevWindowSize.h;
-
-        this.maximizeBtnState = 'maximize';
-        maximizeBtn.innerHTML = '[ ]';
     }
     minimize () {
         this._appContainer.style.display = 'none';

@@ -19,6 +19,8 @@ body {
     flex: 1 0 0%;
     background-image: url("assets/win10/desktop-backgrounds/default.png");
     background-size: cover;
+    position: relative;
+    overflow: hidden;
 }
 
 #win10-taskbar {
